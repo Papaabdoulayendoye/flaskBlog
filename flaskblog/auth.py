@@ -1,35 +1,17 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request, abort
+from flask import (Blueprint, render_template, 
+                    redirect, url_for, 
+                    flash, request, abort)
+
 from .form import (LoginForm, RegistrationForm,
-                PostForm, RequestResetForm, ResetPasswordForm)
+                    PostForm, RequestResetForm, 
+                    ResetPasswordForm)
+
 from . import bcrypt, db, mail
 from .models import User, Post
 from flask_login import (login_required, login_user, logout_user, current_user)
 from flask_mail import Message
 
-
 auth = Blueprint('auth', __name__)
-
-'''
-   # check_username = User.query.filter_by(username=form.username.data.replace(" ", "")).first()
-   # check_email = User.query.filter_by(email=form.email.data.casefold()).first()
-   # if check_username:
-   #    flash('This username is already exists.Please choose another!',category='danger')
-   # elif check_email:
-   #    flash('This email is already exists.Please choose another!',category='danger')
-   # elif form.password.data != form.confirm_password.data:
-   #    flash('Passwords does not match!',category='danger')
-   # else:
-   
-   # from file import a
-   # @auth.route('/db')
-   # def base():
-   #    for data in a:
-   #       post = Post(title=data['title'],content=data['content'],user_id=data['user_id'])
-   #       db.session.add(post)
-   #    db.session.commit()
-   #    return redirect(url_for('auth.login'))
-'''
-
 
 @auth.route('/register', methods=['POST', 'GET'])
 def register():
